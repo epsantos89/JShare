@@ -377,7 +377,6 @@ public class InterfaceGraficaServidor extends JFrame implements IServer{
 	public void publicarListaArquivos(Cliente c, List<Arquivo> lista) throws RemoteException {
 		
 		
-		
 	}
 
 	@Override

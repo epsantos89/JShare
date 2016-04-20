@@ -39,4 +39,5 @@ public class Cliente implements Serializable {
 	public void setPorta(int porta) {
 		this.porta = porta;
 	}
+	
 }

@@ -368,8 +368,7 @@ public class InterfaceGraficaServidor extends JFrame implements IServer{
 			throw new RemoteException("Alguém já está usando o IP: " + c.getIp());
 		}
 		
-		mapaClientes.put(c.getIp(), c);
-		mostrar(" IP: "+c.getIp() + "Nome: " + c.getNome() + " se conectou.");			
+		mapaClientes.put(c.getIp(), c);				
 		
 	}
 

@@ -94,7 +94,7 @@ public class InterfaceGraficaCliente extends JFrame implements IServer {
 	 * Create the frame.
 	 */
 	public InterfaceGraficaCliente() {
-		setTitle("RMI Chat Client");
+		setTitle("RMI JShare Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 745, 468);
 		contentPane = new JPanel();
@@ -277,7 +277,13 @@ public class InterfaceGraficaCliente extends JFrame implements IServer {
 		buttonConectar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				conectar();
+				Cliente c = new Cliente();
+				try {
+					registrarCliente(c);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -342,10 +348,18 @@ public class InterfaceGraficaCliente extends JFrame implements IServer {
 		});
 	}
 
-	/**
-	 * Conecta no servidor.
-	 */
-	protected void conectar() {
+		
+
+	
+	private void mostrar(String string) {
+		textArea.append(sdf.format(new Date()));
+		textArea.append(" -> ");
+		textArea.append(string);
+		textArea.append("\n");
+	}
+
+	@Override
+	public void registrarCliente(Cliente c) throws RemoteException {
 
 		meunome = txfMeuNome.getText().trim();
 		if (meunome.length() == 0) {
@@ -374,9 +388,8 @@ public class InterfaceGraficaCliente extends JFrame implements IServer {
 
 			servidor = (IServer) registry.lookup(IServer.NOME_SERVICO);
 
-			// Avisando o servidor que está entrando no Chat.
+			// Avisando o servidor que está entrando no Chat.			
 			
-			Cliente c = new Cliente();
 			c.setIp(txfIp.getText());
 			c.setNome(txfMeuNome.getText());
 			c.setPorta(intPorta);
@@ -400,25 +413,6 @@ public class InterfaceGraficaCliente extends JFrame implements IServer {
 			e.printStackTrace();
 		}
 
-	}
-
-	/**
-	 * Desconecta do servidor.
-	 */
-
-
-	
-	private void mostrar(String string) {
-		textArea.append(sdf.format(new Date()));
-		textArea.append(" -> ");
-		textArea.append(string);
-		textArea.append("\n");
-	}
-
-	@Override
-	public void registrarCliente(Cliente c) throws RemoteException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -445,13 +439,6 @@ public class InterfaceGraficaCliente extends JFrame implements IServer {
 		
 	}
 
-	// =======================================================================================
-	//
-	// Métodos da implementação da interface.
-	//
-	// =======================================================================================
 
-
-	
 
 }
